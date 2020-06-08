@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/static/css/main.7af77ca0.chunk.css",
+    "main.js": "/static/js/main.5b39a4af.chunk.js",
+    "main.js.map": "/static/js/main.5b39a4af.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.cf09ae57.js",
+    "runtime-main.js.map": "/static/js/runtime-main.cf09ae57.js.map",
+    "static/js/2.3a7aa456.chunk.js": "/static/js/2.3a7aa456.chunk.js",
+    "static/js/2.3a7aa456.chunk.js.map": "/static/js/2.3a7aa456.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.f2c7bf7a25b4318f8c4da6d2015e7a62.js": "/precache-manifest.f2c7bf7a25b4318f8c4da6d2015e7a62.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/main.7af77ca0.chunk.css.map": "/static/css/main.7af77ca0.chunk.css.map",
+    "static/media/arrow.svg": "/static/media/arrow.6a1af9a1.svg",
+    "static/media/govt.svg": "/static/media/govt.c702dc1e.svg",
+    "static/media/members.svg": "/static/media/members.dece2b40.svg",
+    "static/media/new.svg": "/static/media/new.2caa1583.svg",
+    "static/media/news.svg": "/static/media/news.d31bc934.svg",
+    "static/media/post.svg": "/static/media/post.13e1259d.svg",
+    "static/media/social.svg": "/static/media/social.4add1a52.svg"
+  }
+}
