@@ -29,6 +29,8 @@ app.get('/api/votingrecord', (req, res) => {
 app.get('/api/member', (req, res) => {
 	request(`https://members-api.parliament.uk/api/Members/Search?Name=${req.query.name}&skip=0&take=20`, (err, response, body) => {
 		res.send(JSON.parse(body))
+
+		
 	})
 })
 
