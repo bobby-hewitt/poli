@@ -3,6 +3,7 @@ const cors = require('cors')
 const request = require('request')
 const app = express()
 const Feed = require('rss-to-json');
+const Twitter = require('twitter')
 var bodyParser = require('body-parser')
 var path = require('path')
 app.use(cors())
@@ -16,9 +17,36 @@ app.get('/api/', function(req, res,next) {
 const PORT = process.env.PORT || 9000
 require('dotenv').config({path: '.env'})
 
+ 
+var TwitterClient = new Twitter({
+  consumer_key: process.env.TWITTER_KEY,
+  consumer_secret: process.env.TWITTER_SECRET,
+  access_token_key: process.env.TWITTER_ACCESS_TOKEN,
+  access_token_secret: process.env.TWITTER_ACCESS_SECRET
+});
+ 
+
+
+app.get('/api/twittertrends', (req, res) => {
+	TwitterClient.get('trends/place', {id: req.query.s}, function(error, tweets, response) {
+	  if (!error) {
+	    res.send(tweets[0].trends)
+	  }
+	});
+})
+
+app.get('/api/twittersearch', (req, res) => {
+	console.log('search')
+	TwitterClient.get('search/tweets.json', {q: req.query.s}, function(error, tweets, response) {
+	  if (!error) {
+	  	
+	    res.send(tweets.statuses)
+	  }
+	});
+})
+
 
 app.get('/api/votingrecord', (req, res) => {
-	
 	request(`https://commonsvotes-api.parliament.uk/data/divisions.json/membervoting?queryParameters.memberId=${req.query.member}`, (err, response, body) => {
 		if (err) return 
 		res.send(body)
@@ -78,6 +106,18 @@ app.get('/api/divisions', (req, res) => {
 
 })
 
+app.get('/api/division', (req, res) => {
+	request(`https://commonsvotes-api.parliament.uk/data/division/${req.query.id}.json`, (err, response, body) => {
+		res.send(JSON.parse(body))
+	})
+
+})
+
+app.get('/api/memberbyid', (req, res) => {
+	request(`https://members-api.parliament.uk/api/Members/${req.query.id}`, (err, response, body) => {
+		res.send(JSON.parse(body))
+	})
+})
 
 app.get('/api/bills', (req, res) => {
 	Feed.load('https://services.parliament.uk/Bills/AllPublicBills.rss', function(err, rss){
@@ -85,9 +125,23 @@ app.get('/api/bills', (req, res) => {
 	});
 })
 
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '..', 'build', 'index.html'));
-});
+
+app.get('/api/photos', (req, res) => {
+	let uri = req.query.s ? `https://api.unsplash.com/search/photos/?per_page=100&query=${req.query.s}&client_id=${process.env.UNSPLASH_ACCESS}`:
+	`https://api.unsplash.com/photos/?per_page=100&client_id=${process.env.UNSPLASH_ACCESS}`
+	request(uri, (err, response, body) => {
+		if(err) return
+			else{
+		res.send(body)
+		}
+	})
+})
+
+
+
+// app.get('*', (req, res) => {
+//   res.sendFile(path.resolve(__dirname, '..', 'build', 'index.html'));
+// });
 
 
 
