@@ -1,0 +1,106 @@
+#Nodes
+
+type Topic {
+	topicId: ID!
+	title: String
+	description: String
+	image: String
+	articles: [Article]
+	quotes:[Quote]
+	supporters:[Person]
+	partySupporters:[Party]
+	opponents:[Person]
+	partyOpponents:[Party]
+	relatedVotes:[Vote]
+}
+
+type Department {
+	departmentId: ID!
+	name: String
+	ministers:[Person]
+	topics: [Topic]
+	votes: [Vote]
+}
+
+type IssueTag {
+	name: String,
+	topics:[Topic]
+	votes:[Vote]
+}
+
+type Article {
+	articleId: ID!
+	title: String
+	image: String
+	author: String 
+	copy: String
+	url: String
+}
+
+type Quote {
+	quoteId: ID!
+	author: Person
+	quote: String
+	topic: [Topic]
+	vote:[Vote]
+	date: Date
+}
+
+type Person {
+	personId:ID!
+	name: String
+	twitter: String 
+	image: String
+	party:Party @relation(name: "MEMBER_OF", direction: "OUT")
+	office:Department
+	jobTitle: String
+	supporterOf: [Topic]
+	opponentOf: [Topic]
+	votedFor:[Vote]
+	votedAgainst:[Vote]
+}
+
+type Party {
+	partyId: ID!
+	name: String
+	color: String
+	logo: String
+	members:[Person]
+	supporterOf: [Topic]
+	opponentOf: [Topic]
+	votedFor:[Vote]
+	votedAgainst:[Vote]
+
+}
+
+type Vote {
+	voteId:ID!
+}
+
+# Relationships
+
+type Party_Vote_On @relation(name: "PARTY_POSITION_ON") {
+  from: Person
+  to: Topic
+  position: String
+  articles: [Article]
+  quotes: [Quote]
+}
+
+
+
+type Person_Position_On @relation(name: "PERSON_POSITION_ON") {
+  from: Person
+  to: Topic
+  position: String
+  articles: [Article]
+  quotes: [Quote]
+}
+
+type Party_Position_On @relation(name: "PARTY_POSITION_ON") {
+  from: Party
+  to: Topic
+  position: String
+  articles: [Article]
+  quotes: [Quote]
+}
