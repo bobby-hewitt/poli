@@ -15,7 +15,28 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(express.static(__dirname + '/node_modules'));
 app.use(express.static(path.resolve(__dirname, '..', 'build')));  
- 
+const dbqueries  = require('./dbqueries')
+
+
+// console.log('looping', members.items.lenfth)
+// let queries = []
+// for (var i = 0; i < members.items.length; i++){
+  
+  
+  
+// }/
+
+// dbqueries.getUnknownMembers()
+
+// Promise.all(queries)
+// .then((resolution) => {
+//   console.log(resolution)
+// })
+// .catch((err) => {
+//   console.log('error')
+// })
+
+
 var TwitterClient = new Twitter({
   consumer_key: process.env.TWITTER_KEY,
   consumer_secret: process.env.TWITTER_SECRET,
@@ -139,11 +160,15 @@ app.get('/api/photos', (req, res) => {
 })
 
 
+
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '..', 'build', 'index.html'));
 });
 
 
 app.listen(PORT, () => {
-  console.log(`Listening on ${PORT}}`)
+  console.log(`Listening on ${PORT}`)
 })
+
+
+
