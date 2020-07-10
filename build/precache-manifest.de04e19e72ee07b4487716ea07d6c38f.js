@@ -1,19 +1,19 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "0a61f7d27ea616443d34d0974d41a5db",
+    "revision": "3e7ded9b048d27c6d86c75f4cb381fd2",
     "url": "/index.html"
   },
   {
-    "revision": "fad36dfca36d3baf72f4",
-    "url": "/static/css/main.0dd6cb0d.chunk.css"
+    "revision": "29dccf6e5c8bd576b093",
+    "url": "/static/css/main.bc922122.chunk.css"
   },
   {
-    "revision": "3b5f95e1de959134916e",
-    "url": "/static/js/2.77334fc0.chunk.js"
+    "revision": "f836844ce3a1e8907cc6",
+    "url": "/static/js/2.034d1a11.chunk.js"
   },
   {
-    "revision": "fad36dfca36d3baf72f4",
-    "url": "/static/js/main.12308f43.chunk.js"
+    "revision": "29dccf6e5c8bd576b093",
+    "url": "/static/js/main.96ad3043.chunk.js"
   },
   {
     "revision": "66b27179a952c2faad14",
@@ -28,6 +28,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/media/arrow.6a1af9a1.svg"
   },
   {
+    "revision": "cb133e6e4a9d629e7134d45e2d7cf53d",
+    "url": "/static/media/closeBlack.cb133e6e.svg"
+  },
+  {
     "revision": "7d394fbbfb850a3776fc4caa6201b52d",
     "url": "/static/media/edit.7d394fbb.svg"
   },
@@ -36,20 +40,20 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/media/govt.c702dc1e.svg"
   },
   {
+    "revision": "28effef0d1120cc5342c40931f877a06",
+    "url": "/static/media/images.28effef0.svg"
+  },
+  {
     "revision": "dece2b40534a2fa0384a5cb4ef38b43a",
     "url": "/static/media/members.dece2b40.svg"
   },
   {
-    "revision": "d31bc9349df4f70cd8139fe33996c9f2",
-    "url": "/static/media/news.d31bc934.svg"
+    "revision": "c5518435cd79ccb54df93907a3f7d8f2",
+    "url": "/static/media/minus.c5518435.svg"
   },
   {
     "revision": "13e1259d0dfa7d2fc7777348d2e40419",
     "url": "/static/media/post.13e1259d.svg"
-  },
-  {
-    "revision": "4add1a52900c20ea825bfcb334e0836e",
-    "url": "/static/media/social.4add1a52.svg"
   },
   {
     "revision": "58deec554daf55a5ac82bc3605896f12",
