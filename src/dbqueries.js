@@ -28,6 +28,13 @@ var driver = neo4j.driver(process.env.NEO4J_URI, neo4j.auth.basic(process.env.NE
 // 	})
 // }
 
+
+// deleteAllIssues()
+
+// function deleteAllIssues(){
+// 	runCypher({query: `MATCH (n:Issue) DETACH DELETE n`})
+// }
+
 function getAllDepartments(){
 
 
