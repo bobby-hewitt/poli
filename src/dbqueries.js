@@ -35,6 +35,20 @@ var driver = neo4j.driver(process.env.NEO4J_URI, neo4j.auth.basic(process.env.NE
 // 	runCypher({query: `MATCH (n:Issue) DETACH DELETE n`})
 // }
 
+
+function getPerson(personId){
+	return new Promise((resolve, reject) => {
+		runCypher({query: `MATCH (n:Person {personId: '${personId}'}) RETURN n`})
+		.then((person) => {
+			resolve(person.records[0]._fields[0].properties)
+		})
+		.catch(() => {
+			reject({})
+		})
+	})
+	
+}
+
 function getAllDepartments(){
 
 
@@ -245,6 +259,7 @@ function runCypher({query}){
 }
 module.exports = {
 	getAllMembers,
+	getPerson,
 	getUnknownMembers,
 	getAllDepartments,
 	assignPeopleToPosts,

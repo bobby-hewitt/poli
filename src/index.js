@@ -105,15 +105,63 @@ app.get('/api/news', (req, res) => {
 
 app.get('/api/postcode', (req, res) => {
   request(`https://api.postcodes.io/postcodes/${req.query.postcode}`, (err, response, body) => {
+    let coords
     body = JSON.parse(body)
-    if (body.result.parliamentary_constituency){
-      request(`https://members-api.parliament.uk/api/Location/Constituency/Search?searchText=${body.result.parliamentary_constituency}`, (err2, response2, body2) => {
-        res.send(JSON.parse(body2))
+     if (body && body.result){
+       coords = {longitude:body.result.longitude, latitude:body.result.latitude, latitudeDelta: 1, longitudeDelta: 1} 
+     } else {
+       res.status(500).send('error with postcode')
+     }
+    
+
+    if (body && body.result && body.result.parliamentary_constituency){
+      processPostcodes(body.result.parliamentary_constituency, coords)
+      .then((toSend) => {
+        
+        // toSend.constituency = constituency
+        // toSend.mp = person
+        res.status(200).send(toSend)
+      })
+      .catch(() => {
+        res.status(500).send('error')
       })
     }
     
   })
 })
+
+
+
+function processPostcodes(parliamentary_constituency, coords){
+
+  
+  return new Promise((resolve, reject) => {
+
+
+  request(`https://members-api.parliament.uk/api/Location/Constituency/Search?searchText=${parliamentary_constituency}`, (err2, response2, body2) => {
+        const constituencies= JSON.parse(body2)
+        const toSend  = {
+          constituency: {
+            id: constituencies.items[0].value.id,
+            name: constituencies.items[0].value.name,
+            coords: coords,
+          },
+          mp:constituencies.items[0].value.currentRepresentation.member.value.id
+        }
+        resolve(toSend)
+
+
+        // dbqueries.getPerson(constituencies.items[0].value.currentRepresentation.member.value.id)
+        // .then((person) => {
+        //   resolve({constituency, person})
+        // })
+        // .catch(() => {
+        //   reject('error')
+        // })
+        
+      })
+ })
+}
 
 
 app.get('/api/divisions', (req, res) => {
